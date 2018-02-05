@@ -1,18 +1,28 @@
 //login, la var provider provera el servicio para logear.
 var provider = new firebase.auth.GoogleAuthProvider();
-//Se llama al botón login para darle el evento click.
-$('#login').click(serviceGoogle);//Logea los datos que introduzca el usuario.
-//Guardando datos en Firebase cuando se da click en Guardar.
-$('#guardar').click(saveText);//Guarda en Firebase las nuevas actualizaciones.
 
-$('#myProfile').click(showProfile);//Muestra el perfil del usuario.
 
-$('#out').click(showLogin);//Muestra el login.
+$( document ).ready(function(){
 
-$('.backPrincipal').click(showPrincipal);//Muestra la página principal.
+  $(".button-collapse").sideNav();
 
-$('#notification').click(showNotifications);//Muestra las notificaciones recientes.
+  //Se llama al botón login para darle el evento click.
+  $('#login').click(serviceGoogle);//Logea los datos que introduzca el usuario.
+  //Guardando datos en Firebase cuando se da click en Guardar.
+  $('#guardar').click(saveText);//Guarda en Firebase las nuevas actualizaciones.
 
+  $('#myProfile').click(showProfile);//Muestra el perfil del usuario.
+
+  $('#out').click(showLogin);//Muestra el login.
+
+  $('.backPrincipal').click(showPrincipal);//Muestra la página principal.
+
+  $('#notification').click(showNotifications);//Muestra las notificaciones recientes.
+
+  /*Ejecutando el modal al dar click en las imagenes, para mostrar más información sobre los restaurantes*/
+  $("#modal1").modal()
+
+})
 
 function serviceGoogle () {
   firebase.auth()//Mandando a llamar a Firebase.
@@ -36,7 +46,6 @@ function saveUs(user) {
     name:user.displayName,
     email:user.email,
     photo:user.photoURL,
-    sexo: 'MF'
   }
   console.log(InfUser);
   firebase.database().ref('usLogged/' + user.uid)//Se guarda en la rama que tiene una key igual al identificador unico UID del usuario.
@@ -68,16 +77,8 @@ function saveText () {
 function cleanText () {
   $('#text-area').val(' ');//limpiando el campo del text área.
 }
-/*
-//Función que lee la base de datos que alguien más inicia sesión AUTOMÁTICO.
-firebase.database().ref('usuarios')
-//Cuando alguien agregue algo en la rama usuarios, se ejecutará la función anónima.
-.on('child_added', function(s){//s contiene los datos.
-  var user = s.val();//Se guardan los datos en una variable.
-  $('#root').append("<img src='"+user.photo+"'>");//De los datos se toman los datos del usuario que añadio su información.
-})
-*/
-///--------------------------publicación de las actividades del usuario.
+
+///----------publicación de las actividades del usuario.----------
 function paintTextPublication (text) {
   //Función que publica en la zona de las publicaciones de los usuarios.
   var database1 = firebase.database().ref("publications").once("value").then(function(snapshot){
@@ -91,6 +92,7 @@ function paintTextPublication (text) {
   });
 }//Fin de paintTextPublication.
 
+//Función que crea elementos por medio de DOM para poder llenarlos del contenido que se extraiga de Firebase.
 function createElemen (texto) {
   var containerText = document.createElement('div');
   var textUs = document.createElement('label');
@@ -102,19 +104,7 @@ function createElemen (texto) {
   $('#publications').prepend(containerText);
 }
 
-/*function saveData (user) {
-  var objUser = {
-    uid:user.uid,
-    name:user.displayName,
-    email:user.email,
-    photo:user.photoURL,
-  }
-  dataUsers.push(objUser);
-  console.log(dataUsers);
-  console.log(objUser);
-  console.log('data impresa');
-}
-*/
+//-----Funciones que muestran y ocultan las ventanas al usuario.-----
 function showProfile () {
   $('#welcome').hide();//Ocultado la ventana de logear.
   $('#container-profile').show('slow');//Mostrando la pantalla del perfil del us.

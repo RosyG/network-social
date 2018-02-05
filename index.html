@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" type="image/gif" href="assets\icon-meta.jpg" />
+    <link rel="icon" type="image/gif" href="assets/icon-meta.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Social Network</title>
   </head>
@@ -21,10 +21,25 @@
 
     <section id="welcome">
 
-      <li><a id="notification" href="#">Notificaciones</a></li>
-      <li><a id="myProfile" href="#">Mi perfil</a></li>
-      <li><a href="#" id="out">Salir</a></li>
-      <input type="text" class="form-control" placeholder="Search">
+      <nav>
+         <div class="nav-wrapper">
+           <a href="#!" class="brand-logo">Logo</a>
+           <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+           <ul class="right hide-on-med-and-down">
+             <li><a id="notification" href="#">New feeds</a></li>
+             <li><a id="myProfile" class="modal-trigger" href="#modal1">My profile</a></li>
+             <li><a id="out" href="#">Out</a></li>
+             <li><a href="#">Mobile</a></li>
+           </ul>
+           <ul class="side-nav" id="mobile-demo">
+             <li><a id="notification" href="#">New feeds</a></li>
+             <li><a id="myProfile" class="modal-trigger" href="#modal1">My profile</a></li>
+             <li><a id="out" href="#">Out</a></li>
+             <li><a href="#">Mobile</a></li>
+           </ul>
+         </div>
+       </nav>
+
 
       <section class="conteiner">
 
@@ -34,15 +49,6 @@
 
       </section>
 
-      <!--section conteiner myProfile  -->
-    <section id="container-profile">
-        <div class="row">
-            <h3 id="name" class = 'name-us'></h3>
-            <h3 id="email" class = 'email-us'></h3>
-            <button class="backPrincipal" name="inicio">Volver a Inicio</button>
-        </div>
-        </div>
-      </section>
 
       <!--conteiner Notifications  -->
     <section id="container-notifications">
@@ -51,14 +57,37 @@
       </div>
     </section>
 
+    <!-- Modal Structure -->
 
+    <div id="modal1" class="modal">
+      <div class="modal-content col s6 m6">
+          <div class="row">
+            <a href="#!" id="close" class="modal-action modal-close waves-effect waves-green btn-flat right">x</a>
+          </div>
+          <div class="row">
+            <div class="col s12 m12 center">
+              <h3 id="name" class="name-us"></h3>
+            </div>
+            <div class="col s12 m12 center bg-perfil">
 
+            </div>
+            <div class="row center">
+              <p id="email" class = 'email-us'></p>
+              <a class="btn waves-effect waves-light orange">New Feeds</a>
+            </div>
+          </div>
+      </div>
+    </div>
 
 <!--Agregando CDN de jQuery-->
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
       crossorigin="anonymous"></script>
+
+<!-- Compiled and minified JavaScript -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
 
 <!--Agregando Firebase-->
       <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
@@ -77,11 +106,7 @@
         </script>
 
 
-
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-      <!--Agregando archivo de javascript-->
+  <!--Agregando archivos locales de javascript-->
       <script src="js/data.js"></script>
       <script src="js/app.js"></script>
   </body>
