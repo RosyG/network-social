@@ -1,0 +1,40 @@
+/*section login */
+#dsp {
+  display: block;
+}
+
+#login {
+ background-color: rgb(212, 67, 50);
+}
+
+
+#welcome {
+  display: none; /*vista ocutada*/
+}
+
+/* background vista login */
+.login {
+  display: block;
+}
+
+/*Estilos del perfil del usuario*/
+#container-profile {
+  display: none;
+}
+
+/*Estilos de la ventana de notificaciones*/
+#container-profile {
+  display: none;
+}
+
+#img-perfil {
+  border-radius: 50vw;
+}
+
+/*estilo textarea  */
+#text-area {
+  background: rgba(136, 255, 0,0.2);
+  border: none;
+  border: 2px solid rgb(136, 255, 0);
+  font-size: 1em;
+}

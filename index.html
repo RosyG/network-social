@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/gif" href="assets\icon-meta.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Social Network</title>
+  </head>
+  <body>
+    <section class= "conteiner login">
+
+        <div class="row">
+          <h3>Inicia sesión</h3>
+        </div>
+
+        <button id="login" name="login">Login with Google</button>
+    </section>
+
+    <section id="welcome">
+
+      <li><a id="notification" href="#">Notificaciones</a></li>
+      <li><a id="myProfile" href="#">Mi perfil</a></li>
+      <li><a href="#" id="out">Salir</a></li>
+      <input type="text" class="form-control" placeholder="Search">
+
+      <section class="conteiner">
+
+              <h1 id="welcome-user"></h1>
+              <textarea id="text-area" placeholder="Escribe tu historia" name="text" rows="7"></textarea>
+              <button id="guardar">Guardar</button>
+
+      </section>
+
+      <!--section conteiner myProfile  -->
+    <section id="container-profile">
+        <div class="row">
+            <h3 id="name" class = 'name-us'></h3>
+            <h3 id="email" class = 'email-us'></h3>
+            <button class="backPrincipal" name="inicio">Volver a Inicio</button>
+        </div>
+        </div>
+      </section>
+
+      <!--conteiner Notifications  -->
+    <section id="container-notifications">
+      <button class="backPrincipal"  name="backPrincipal">Regresar a Principal</button>
+      <div id="publications">
+      </div>
+    </section>
+
+
+
+
+<!--Agregando CDN de jQuery-->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"></script>
+
+<!--Agregando Firebase-->
+      <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
+        <script>
+        // Initialize Firebase
+          var config = {
+            apiKey: "AIzaSyDGlLv5O2w1A9ZnTP5NrZT_hiN_MpB98dQ",
+            authDomain: "socialnetwork-782fc.firebaseapp.com",
+            databaseURL: "https://socialnetwork-782fc.firebaseio.com",
+            projectId: "socialnetwork-782fc",
+            storageBucket: "socialnetwork-782fc.appspot.com",
+            messagingSenderId: "400837775170"
+          };
+          firebase.initializeApp(config);
+        </script>
+
+
+
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+      <!--Agregando archivo de javascript-->
+      <script src="js/data.js"></script>
+      <script src="js/app.js"></script>
+  </body>
+</html>
