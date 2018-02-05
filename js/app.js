@@ -3,6 +3,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 
 
 $( document ).ready(function(){
+  showLogin ();//SE muesta el login.
 
   $(".button-collapse").sideNav();
 
@@ -11,16 +12,26 @@ $( document ).ready(function(){
   //Guardando datos en Firebase cuando se da click en Guardar.
   $('#guardar').click(saveText);//Guarda en Firebase las nuevas actualizaciones.
 
-  $('#myProfile').click(showProfile);//Muestra el perfil del usuario.
-
-  $('#out').click(showLogin);//Muestra el login.
-
   $('.backPrincipal').click(showPrincipal);//Muestra la página principal.
 
-  $('#notification').click(showNotifications);//Muestra las notificaciones recientes.
+  $('.notification').click(paintTextPublication);//Muestra las notificaciones recientes.
 
   /*Ejecutando el modal al dar click en las imagenes, para mostrar más información sobre los restaurantes*/
-  $("#modal1").modal()
+  $("#modal1").modal();
+
+  //Función para cerrar sesión
+  $(".out").click(function(e) {
+    e.preventDefault();
+  console.log("q out");
+    showLogin ();//Oculta principal.
+    firebase
+      .auth()
+      .signOut()
+      .then()//Función que muestra la ventana login y oculta las demás vistas para el usuario
+      .catch(function(error) {
+        // An error happened.
+      });
+  });
 
 })
 
@@ -54,6 +65,7 @@ function saveUs(user) {
 
 //Función que pinya la información del usuario.
 function paintProfile (user) {
+  $('.bg-perfil').empty();//Borra los hijos en el div bg-perfil que ya fueron pintadaos para que no se sobre escriba y existan repeticiones.
   var imgUser = user.photoURL;//Variable que contine toda la inf del usuario.
   var nameUser = user.displayName;
   var email = user.email;
@@ -69,7 +81,7 @@ function saveText () {
   firebase.database().ref('publications')
     .push(textArea)//Añadiendo la publicación en la rama 'publications'.
   dataPublications.push(textArea);//Guardando la publicación en la data local.
-  $('#notification').click(paintTextPublication (textArea));//Ejecutando la función que pintará las publicationes guardadas en Firebase.
+//  $('#notification').click(paintTextPublication (textArea));//Ejecutando la función que pintará las publicationes guardadas en Firebase.
   cleanText ();
 }
 
@@ -80,52 +92,67 @@ function cleanText () {
 
 ///----------publicación de las actividades del usuario.----------
 function paintTextPublication (text) {
+  showNotifications ();//Función que muestra la sección que contiene las nuevas publicaciones.
   //Función que publica en la zona de las publicaciones de los usuarios.
   var database1 = firebase.database().ref("publications").once("value").then(function(snapshot){
-    var obj = snapshot.val()//Se obtiene el valor del objeto snapshot, el que contiene las keys con sus valores, los valores son las publicaciones que todos los usuarios han escrito, ie, las nuevas noticias.
-    console.log('a borrar');
-      $('#publications').empty();//Borra las actualizaciones que ya fueron pintadas para que no se sobre escriba y existan repeticiones.
-    for (var key in obj) {
+  var obj = snapshot.val()//Se obtiene el valor del objeto snapshot, el que contiene las keys con sus valores, los valores son las publicaciones que todos los usuarios han escrito, ie, las nuevas noticias.
+  $('#publications').empty();//Borra las actualizaciones que ya fueron pintadas para que no se sobre escriba y existan repeticiones.
+
+  for (var key in obj) {
       createElemen (obj[key]);//Mandando a pintar cada elemento que contiene la sección de las publicaciones.
       console.log(obj[key]);
     }
   });
+
 }//Fin de paintTextPublication.
 
 //Función que crea elementos por medio de DOM para poder llenarlos del contenido que se extraiga de Firebase.
 function createElemen (texto) {
-  var containerText = document.createElement('div');
+  var $containerText = $('<div />',
+    {'class':'new-us-write'});
+  var nameWrite = document.createElement('label');//Nombre del us que escribe.
   var textUs = document.createElement('label');
+/********************
+  //us que escribe
+  nameWrite.innerHTML = 'HI';
+  containerText.append(nameWrite);
+  //    $('.bg-perfil').append("<img id='img-perfil'  class = 'img-us' src = '"+imgUser+"' />");
 
-  containerText.append(textUs);
+//*******************
+//Nuev publicación DEL USUARIO Q SE LOGEA.
+var nameWrite = document.createElement('label');//Nombre del us que escribe.
+nameWrite.innerHTML = 'HI';
+//    $('.bg-perfil').append("<img id='img-perfil'  class = 'img-us' src = '"+imgUser+"' />");
+
+$('.new-us-write').append(nameWrite)
+//********************
+*/
+
   textUs.innerHTML = texto;
-  containerText.append(textUs);
 
-  $('#publications').prepend(containerText);
+  $containerText.append(textUs);
+
+  $('#publications').prepend($containerText);
 }
 
 //-----Funciones que muestran y ocultan las ventanas al usuario.-----
-function showProfile () {
-  $('#welcome').hide();//Ocultado la ventana de logear.
-  $('#container-profile').show('slow');//Mostrando la pantalla del perfil del us.
-}
 
 function showLogin () {
+  $('.login').show('slow');//Muestra la ventana de logear.
   $('#welcome').hide();//Ocultado la ventana de principal.
   $('#container-profile').hide();//Mostrando la pantalla del perfil del us.
   $('#container-notifications').hide();//Oculta la ventana de notificaciones.
-  $('.login').show('slow');//Muestra la ventana de logear.
 }
 
 function showPrincipal () {
+  $('#welcome').show('slow');//Muestra la página principal.
   $('#container-profile').hide();//Mostrando la pantalla del perfil del us.
   $('.login').hide();//Ocultado la ventana de logear.
   $('#container-notifications').hide();//Oculta la ventana de notificaciones.
-  $('#welcome').show('slow');//Muestra la página principal.
 }
 
 function showNotifications () {
+  $('#container-notifications').show('slow');//Muestra la ventana de notificaciones.
   $('#welcome').hide();//Ocultado la ventana de principal.
   $('#container-profile').hide();//Mostrando la pantalla del perfil del us.
-  $('#container-notifications').show('slow');//Muestra la ventana de notificaciones.
 }

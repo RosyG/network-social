@@ -26,15 +26,15 @@
            <a href="#!" class="brand-logo">Logo</a>
            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
            <ul class="right hide-on-med-and-down">
-             <li><a id="notification" href="#">New feeds</a></li>
+             <li><a class="notification" href="#">New feeds</a></li>
              <li><a id="myProfile" class="modal-trigger" href="#modal1">My profile</a></li>
-             <li><a id="out" href="#">Out</a></li>
+             <li><a class="out" href="#">Out</a></li>
              <li><a href="#">Mobile</a></li>
            </ul>
            <ul class="side-nav" id="mobile-demo">
-             <li><a id="notification" href="#">New feeds</a></li>
+             <li><a class="notification" href="#">New feeds</a></li>
              <li><a id="myProfile" class="modal-trigger" href="#modal1">My profile</a></li>
-             <li><a id="out" href="#">Out</a></li>
+             <li><a class="out" href="#">Out</a></li>
              <li><a href="#">Mobile</a></li>
            </ul>
          </div>
@@ -48,11 +48,13 @@
               <button id="guardar">Guardar</button>
 
       </section>
+    </section>
 
 
       <!--conteiner Notifications  -->
     <section id="container-notifications">
-      <button class="backPrincipal"  name="backPrincipal">Regresar a Principal</button>
+      <h3>Aquí las nuevas publicaciones.</h3>
+      <button class="backPrincipal"  name="backPrincipal">Back Home</button>
       <div id="publications">
       </div>
     </section>
@@ -73,7 +75,7 @@
             </div>
             <div class="row center">
               <p id="email" class = 'email-us'></p>
-              <a class="btn waves-effect waves-light orange">New Feeds</a>
+              <a class="notification modal-action modal-close btn waves-effect waves-light orange">New Feeds</a>
             </div>
           </div>
       </div>
