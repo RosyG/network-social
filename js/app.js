@@ -1,5 +1,7 @@
 //login, la var provider provera el servicio para logear.
 var provider = new firebase.auth.GoogleAuthProvider();
+//Variable que maneja la base de datos de firebase.
+var db = firebase.database();
 
 
 $( document ).ready(function(){
@@ -18,6 +20,8 @@ $( document ).ready(function(){
 
   /*Ejecutando el modal al dar click en las imagenes, para mostrar más información sobre los restaurantes*/
   $("#modal1").modal();
+
+  db.ref('publications').on('child_added', messageAutomatic); //Añadiendo mensaje de manera autómatica.
 
   //Función para cerrar sesión
   $(".out").click(function(e) {
@@ -61,6 +65,17 @@ function saveUs(user) {
   console.log(InfUser);
   firebase.database().ref('usLogged/' + user.uid)//Se guarda en la rama que tiene una key igual al identificador unico UID del usuario.
     .set(InfUser);//set modifica a la llave especificada por el uid, push() solo agrega de nuevo.
+}
+
+//Función que añade las nuevas publicaciones de manera automatica.
+function messageAutomatic () {
+
+  var message = $('#text-area').val();
+  db.ref('myPublications').push ({
+    message:message
+    //Añadiendo el nombre message como key.
+  })
+  $('#my-publications').prepend('<p>' + message + '<p /><br>' );
 }
 
 //Función que pinya la información del usuario.
@@ -156,3 +171,4 @@ function showNotifications () {
   $('#welcome').hide();//Ocultado la ventana de principal.
   $('#container-profile').hide();//Mostrando la pantalla del perfil del us.
 }
+////////////////////chat
